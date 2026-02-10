@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Hotel\Hotel;
+use App\Models\Apartment\Aprtment;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $hotels = Hotel::select()->orderBy('id','desc')->get();
+        $rooms = Aprtment::select()->orderBy('id','desc')->get();
+
+
+        return view('home', compact('hotels', 'rooms'));
     }
 }
